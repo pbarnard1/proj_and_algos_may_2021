@@ -36,16 +36,20 @@ function findMax(arr) {
 
 // Recursive version
 function rFindMax(arr, ind=0) { // Notice the optional parameter ind, which we'll set to a default value of 0
+    // To prevent infinite recursion: what if ind < 0 OR ind > length of array?
+    if (ind < 0 || ind >= ind.arr.length) {
+        return false; // Arbitrary value picked here
+    }
     // Base case: reached the final value, so just return that value only for comparison
     if (ind == arr.length - 1) {
         return arr[ind];
     }
-    // Forward progress - move forward in the array by incrementing the index
+    // Forward progress - move forward in the array by incrementing the index in the recursion
     return Math.max(arr[ind],rFindMax(arr, ind+1));
 }
 
 console.log(rFindMax([8, 4, 15, 5, 7, 12, 6])); // Max value for entire array - using default index of 0 since none was specified
-console.log(rFindMax([8, 4, 15, 5, 7, 12, 6],4)); // Max value starting with index 4
+console.log(rFindMax([8, 4, 15, 5, 7, 12, 6],4)); // Max value starting at index 4
 
 // Analogy: sending people down a chasm through a series of ladders, then retrieve the value at the bottom
 // and bring it back up - notice we're returning a value each time
